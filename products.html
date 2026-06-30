@@ -11,8 +11,7 @@
   <!-- Custom styles -->
   <link rel="stylesheet" href="css/style.css" />
 
-  <script>window.APININJA_KEY = 'm97LbnFuSlxVGVZK5X6vLHvsb64s4Cg65OkSD3vW';</script>
-</head>
+  </head>
 <body data-page="catalog">
 
   <!-- ======================================================
@@ -107,14 +106,21 @@
           <!-- Sidebar -->
           <div class="col-lg-3">
 
-            <!-- Live price widget -->
+            <!-- Currency converter widget -->
             <div class="price-widget" id="price-widget" style="background: var(--col-surface); border-color: var(--col-border); border-left-color: var(--col-spark);">
-              <div class="price-widget__label" style="color: var(--col-muted);">Aluminum Spot Price</div>
-              <div>
-                <span class="price-widget__value" style="color: var(--col-steel);">—</span>
-                <span class="price-widget__unit">USD/t</span>
+              <div class="price-widget__label" style="color: var(--col-muted);">Convert Your Quote</div>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span style="color: var(--col-steel);">100 USD =</span>
+                <span class="price-widget__value" id="currency-result" style="color: var(--col-steel);">—</span>
+                <select id="currency-select" class="form-select form-select-sm" style="width:auto; display:inline-block;">
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="AED">AED</option>
+                  <option value="SAR">SAR</option>
+                  <option value="LBP">LBP</option>
+                </select>
               </div>
-              <div class="price-widget__status loading">Fetching…</div>
+              <div class="price-widget__status loading" id="currency-status">Loading exchange rates…</div>
             </div>
 
             <!-- Category guide -->

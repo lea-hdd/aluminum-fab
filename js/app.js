@@ -1,6 +1,6 @@
 /**
  * AlumiFab — Main JavaScript
- * ES6 Classes: Product, Catalog, AlertManager, AluminumPriceWidget
+ * ES6 Classes: Product, Catalog, AlertManager, CurrencyConverter
  */
 
 'use strict';
@@ -199,62 +199,62 @@ class AlertManager {
 }
 
 // ============================================================
-// CLASS: AluminumPriceWidget
-// Fetches live aluminum price from API Ninjas Commodity API
+// CLASS: CurrencyConverter
+// Converts a fixed USD quote amount into a chosen currency
+// using the Frankfurter exchange rate API (api.frankfurter.app).
+// No API key required, and the API sends proper CORS headers,
+// so it works directly from the browser with no proxy needed.
 // ============================================================
-class AluminumPriceWidget {
-  constructor(containerSelector, apiKey) {
-    this.container = document.querySelector(containerSelector);
-    this.apiKey    = apiKey;
+class CurrencyConverter {
+  constructor(containerSelector, selectSelector, resultSelector, statusSelector, baseAmount = 100) {
+    this.container   = document.querySelector(containerSelector);
+    this.selectEl    = document.querySelector(selectSelector);
+    this.resultEl    = document.querySelector(resultSelector);
+    this.statusEl    = document.querySelector(statusSelector);
+    this.baseAmount  = baseAmount;
+  }
+
+  init() {
+    if (!this.container || !this.selectEl) return;
+    this.selectEl.addEventListener('change', () => this.fetch());
+    this.fetch();
   }
 
   async fetch() {
-    if (!this.container) return;
+    if (!this.selectEl) return;
+    const targetCurrency = this.selectEl.value;
 
-    this._setStatus('loading', 'Fetching live market data…');
+    this._setStatus('loading', 'Fetching exchange rate…');
 
     try {
-      // Bypassing client-side CORS policy restrictions using a public demo proxy
-      const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-      const targetUrl = 'https://api.api-ninjas.com/v1/commodityprice?name=aluminum';
-
-      const res = await fetch(
-        proxyUrl + targetUrl,
-        { headers: { 'X-Api-Key': this.apiKey } }
-      );
+      const url = `https://api.frankfurter.dev/v1/latest?from=USD&to=${targetCurrency}`;
+      const res = await fetch(url);
 
       if (!res.ok) throw new Error(`API responded ${res.status}`);
 
       const data = await res.json();
 
-      if (data && data.price !== undefined) {
-        this._render(data.price, data.updated);
+      if (data && data.rates && data.rates[targetCurrency] !== undefined) {
+        this._render(data.rates[targetCurrency], targetCurrency, data.date);
       } else {
         throw new Error('Unexpected response format');
       }
     } catch (err) {
-      console.warn('AluminumPriceWidget:', err.message);
-      this._setStatus('error', 'Price data unavailable');
+      console.warn('CurrencyConverter:', err.message);
+      this._setStatus('error', 'Exchange rate unavailable');
     }
   }
 
-  _render(price, updatedAt) {
-    const valueEl  = this.container.querySelector('.price-widget__value');
-    const statusEl = this.container.querySelector('.price-widget__status');
-
-    if (valueEl)  valueEl.textContent  = `$${Number(price).toFixed(2)}`;
-    if (statusEl) {
-      const date = updatedAt ? new Date(updatedAt * 1000).toLocaleDateString() : 'today';
-      statusEl.textContent  = `LME spot price · Updated ${date}`;
-      statusEl.className    = 'price-widget__status';
-    }
+  _render(rate, currency, date) {
+    const converted = (this.baseAmount * rate).toFixed(2);
+    if (this.resultEl) this.resultEl.textContent = `${converted} ${currency}`;
+    this._setStatus('', `Rate as of ${date}`);
   }
 
   _setStatus(type, msg) {
-    const statusEl = this.container?.querySelector('.price-widget__status');
-    if (statusEl) {
-      statusEl.textContent = msg;
-      statusEl.className   = `price-widget__status ${type}`;
+    if (this.statusEl) {
+      this.statusEl.textContent = msg;
+      this.statusEl.className   = `price-widget__status ${type}`;
     }
   }
 }
@@ -359,7 +359,7 @@ const PRODUCTS = [
 // ============================================================
 let catalog      = null;
 let alertManager = null;
-let priceWidget  = null;
+let currencyConverter = null;
 
 // Redirect to contact page with product pre-selected
 function requestQuote(productName) {
@@ -375,9 +375,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // --- HOME ---
   if (page === 'home') {
-    // Standardizing implementation to fetch from direct key string injection
-    priceWidget = new AluminumPriceWidget('#price-widget', 'm97LbnFuSlxVGVZK5X6vLHvsb64s4Cg65OkSD3vW');
-    priceWidget.fetch();
+    currencyConverter = new CurrencyConverter(
+      '#price-widget', '#currency-select', '#currency-result', '#currency-status'
+    );
+    currencyConverter.init();
   }
 
   // --- CATALOG ---
@@ -400,9 +401,10 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Standardizing implementation to fetch from direct key string injection
-    priceWidget = new AluminumPriceWidget('#price-widget', 'm97LbnFuSlxVGVZK5X6vLHvsb64s4Cg65OkSD3vW');
-    priceWidget.fetch();
+    currencyConverter = new CurrencyConverter(
+    '#price-widget', '#currency-select', '#currency-result', '#currency-status'
+    );
+    currencyConverter.init();
   }
 
   // --- CONTACT ---

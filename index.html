@@ -11,9 +11,7 @@
   <!-- Custom styles -->
   <link rel="stylesheet" href="css/style.css" />
 
-  <!-- API key -->
-  <script>window.APININJA_KEY = 'm97LbnFuSlxVGVZK5X6vLHvsb64s4Cg65OkSD3vW';</script>!!!!!!!!!!!!!!!!!!!!!!!!!!
-</head>
+  </head>
 <body data-page="home">
 
   <!-- ======================================================
@@ -55,16 +53,22 @@
               <a href="contact.html" class="btn-outline-custom">Get a Quote</a>
             </div>
 
-            <!-- Live price widget -->
+            <!-- Currency converter widget -->
             <div class="price-widget mt-5" id="price-widget">
-              <div class="price-widget__label">Live Aluminum Market Price</div>
-              <div>
-                <span class="price-widget__value">—</span>
-                <span class="price-widget__unit">USD / metric ton</span>
+              <div class="price-widget__label">Convert Your Quote</div>
+              <div class="d-flex align-items-center gap-2 flex-wrap">
+                <span>100 USD =</span>
+                <span class="price-widget__value" id="currency-result">—</span>
+                <select id="currency-select" class="form-select form-select-sm" style="width:auto; display:inline-block;">
+                  <option value="EUR">EUR</option>
+                  <option value="GBP">GBP</option>
+                  <option value="AED">AED</option>
+                  <option value="SAR">SAR</option>
+                  <option value="LBP">LBP</option>
+                </select>
               </div>
-              <div class="price-widget__status loading">Loading market data…</div>
+              <div class="price-widget__status loading" id="currency-status">Loading exchange rates…</div>
             </div>
-          </div>
 
           <div class="col-lg-5 d-none d-lg-flex justify-content-center align-items-center">
             <div style="font-size:10rem; opacity:0.15; user-select:none;">🏗️</div>
