@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Request a free quote from AlumiFab for aluminum windows, doors, railings, and facade systems." />
+  <title>Get a Quote — AlumiFab</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="contact">
+
+  <!-- ======================================================
+       NAVIGATION
+  ====================================================== -->
+  <nav class="navbar navbar-expand-lg site-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Alumi<span>Fab</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link active" href="contact.html">Get a Quote</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ======================================================
+         PAGE HEADER
+    ====================================================== -->
+    <section style="background: var(--col-steel); padding: 3rem 0 2.5rem; border-bottom: 3px solid var(--col-spark);">
+      <div class="container">
+        <span class="section-label">Free consultation</span>
+        <h1 class="section-title" style="color: var(--col-white); margin-bottom:0.5rem;">Request a Quote</h1>
+        <p style="color: var(--col-sheen); font-size: 0.95rem; max-width:55ch;">
+          Fill in the form and we'll get back to you within one business day with sizing options, material choices, and an indicative price.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         CONTACT SECTION
+    ====================================================== -->
+    <section class="contact-section">
+      <div class="container">
+
+        <!-- Alert messages container -->
+        <div id="alert-container" role="alert" aria-live="polite" style="max-width:700px; margin: 0 auto var(--sp-lg);"></div>
+
+        <div class="row g-5 justify-content-center">
+
+          <!-- FORM -->
+          <div class="col-lg-7">
+            <div class="contact-card">
+              <h2 style="font-family:var(--font-display); font-size:1.75rem; text-transform:uppercase; color:var(--col-steel); margin-bottom:var(--sp-xl);">
+                Project Details
+              </h2>
+
+              <form id="quote-form" novalidate>
+
+                <div class="row g-3">
+                  <!-- Name -->
+                  <div class="col-sm-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom" for="name">Full Name *</label>
+                      <input
+                        type="text"
+                        id="name"
+                        class="form-control-custom"
+                        placeholder="Georges Khoury"
+                        autocomplete="name"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Email -->
+                  <div class="col-sm-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom" for="email">Email Address *</label>
+                      <input
+                        type="email"
+                        id="email"
+                        class="form-control-custom"
+                        placeholder="georges@example.com"
+                        autocomplete="email"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <div class="row g-3">
+                  <!-- Phone -->
+                  <div class="col-sm-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom" for="phone">Phone Number</label>
+                      <input
+                        type="tel"
+                        id="phone"
+                        class="form-control-custom"
+                        placeholder="+961 3 000 000"
+                        autocomplete="tel"
+                      />
+                    </div>
+                  </div>
+
+                  <!-- Company -->
+                  <div class="col-sm-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom" for="company">Company / Project Name</label>
+                      <input
+                        type="text"
+                        id="company"
+                        class="form-control-custom"
+                        placeholder="Residence Khoury, Jal el Dib"
+                        autocomplete="organization"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Product category -->
+                <div class="form-group-custom">
+                  <label class="form-label-custom" for="product-select">Product Category *</label>
+                  <select id="product-select" class="form-control-custom">
+                    <option value="">— Select a product —</option>
+                    <optgroup label="Windows">
+                      <option value="Thermal Break Casement Window">Thermal Break Casement Window</option>
+                      <option value="Fixed Picture Window">Fixed Picture Window</option>
+                      <option value="Sliding Sash Window">Sliding Sash Window</option>
+                      <option value="Tilt & Turn Window">Tilt &amp; Turn Window</option>
+                      <option value="Louvered Vent Window">Louvered Vent Window</option>
+                    </optgroup>
+                    <optgroup label="Doors">
+                      <option value="Pivot Entry Door">Pivot Entry Door</option>
+                      <option value="Sliding Patio Door">Sliding Patio Door</option>
+                      <option value="Folding Bi-Fold Door">Folding Bi-Fold Door</option>
+                      <option value="Security Fire Door">Security Fire Door</option>
+                      <option value="Flush Swing Door">Flush Swing Door</option>
+                    </optgroup>
+                    <optgroup label="Railings">
+                      <option value="Glass Balcony Railing">Glass Balcony Railing</option>
+                      <option value="Horizontal Bar Railing">Horizontal Bar Railing</option>
+                      <option value="Decorative Spindle Railing">Decorative Spindle Railing</option>
+                      <option value="Pool Fence Railing">Pool Fence Railing</option>
+                    </optgroup>
+                    <optgroup label="Facades">
+                      <option value="Ventilated Facade Panel">Ventilated Facade Panel</option>
+                      <option value="Perforated Screen Panel">Perforated Screen Panel</option>
+                    </optgroup>
+                    <optgroup label="Louvres">
+                      <option value="Fixed External Louvre">Fixed External Louvre</option>
+                      <option value="Motorized Adjustable Louvre">Motorized Adjustable Louvre</option>
+                    </optgroup>
+                    <option value="Custom / Not listed">Custom / Not listed</option>
+                  </select>
+                </div>
+
+                <!-- Dimensions -->
+                <div class="row g-3">
+                  <div class="col-sm-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom" for="dimensions">Approximate Dimensions</label>
+                      <input
+                        type="text"
+                        id="dimensions"
+                        class="form-control-custom"
+                        placeholder="e.g. 1.2m wide × 2.4m tall"
+                      />
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div class="form-group-custom">
+                      <label class="form-label-custom" for="quantity">Quantity / Units</label>
+                      <input
+                        type="number"
+                        id="quantity"
+                        class="form-control-custom"
+                        placeholder="e.g. 12"
+                        min="1"
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message -->
+                <div class="form-group-custom">
+                  <label class="form-label-custom" for="message">Project Description</label>
+                  <textarea
+                    id="message"
+                    class="form-control-custom"
+                    rows="5"
+                    placeholder="Describe your project: location, floor level, preferred finish, any special requirements…"
+                  ></textarea>
+                </div>
+
+                <!-- Finish preference -->
+                <div class="form-group-custom">
+                  <label class="form-label-custom d-block" style="margin-bottom:0.75rem;">Preferred Finish</label>
+                  <div class="d-flex flex-wrap gap-3">
+                    <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--col-muted); cursor:pointer;">
+                      <input type="radio" name="finish" value="powder-coated" style="accent-color: var(--col-steel);" /> Powder coated
+                    </label>
+                    <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--col-muted); cursor:pointer;">
+                      <input type="radio" name="finish" value="anodized" style="accent-color: var(--col-steel);" /> Anodized
+                    </label>
+                    <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--col-muted); cursor:pointer;">
+                      <input type="radio" name="finish" value="mill" style="accent-color: var(--col-steel);" /> Mill finish
+                    </label>
+                    <label style="display:flex; align-items:center; gap:0.5rem; font-size:0.875rem; color:var(--col-muted); cursor:pointer;">
+                      <input type="radio" name="finish" value="undecided" style="accent-color: var(--col-steel);" checked /> Not decided yet
+                    </label>
+                  </div>
+                </div>
+
+                <button type="submit" id="submit-btn" class="btn-primary-custom w-100 mt-2" style="padding: 0.85rem; font-size:1rem;">
+                  Send Quote Request
+                </button>
+
+                <p style="font-size:0.8rem; color:var(--col-muted); margin-top:var(--sp-md); text-align:center;">
+                  We respond within 1 business day. Your information is never shared with third parties.
+                </p>
+              </form>
+            </div>
+          </div>
+
+          <!-- CONTACT INFO -->
+          <div class="col-lg-4">
+            <div class="contact-info-card">
+              <h3>Get in touch</h3>
+
+              <div class="contact-detail">
+                <span class="contact-detail__icon">📍</span>
+                <div>
+                  <div class="contact-detail__label">Workshop & Showroom</div>
+                  <div class="contact-detail__value">Industrial Zone, Jdeideh<br>Beirut, Lebanon</div>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <span class="contact-detail__icon">📞</span>
+                <div>
+                  <div class="contact-detail__label">Phone</div>
+                  <div class="contact-detail__value">+961 1 234 567</div>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <span class="contact-detail__icon">✉️</span>
+                <div>
+                  <div class="contact-detail__label">Email</div>
+                  <div class="contact-detail__value">info@alumifab.lb</div>
+                </div>
+              </div>
+
+              <div class="contact-detail">
+                <span class="contact-detail__icon">🕐</span>
+                <div>
+                  <div class="contact-detail__label">Working hours</div>
+                  <div class="contact-detail__value">Mon – Sat, 8:00 AM – 6:00 PM</div>
+                </div>
+              </div>
+
+              <!-- Info alert example -->
+              <div class="alert-custom alert-info mt-4" style="background: rgba(21,101,192,0.15); color: var(--col-sheen);">
+                <span class="alert-custom__icon">ℹ</span>
+                <div>
+                  <div class="alert-custom__title" style="color:var(--col-white);">Site visits available</div>
+                  <div class="alert-custom__body">We can arrange a free on-site measurement for projects in Greater Beirut.</div>
+                </div>
+              </div>
+
+              <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--sp-lg); margin-top: var(--sp-lg);">
+                <div class="contact-detail__label" style="margin-bottom: var(--sp-sm);">Quick links</div>
+                <a href="products.html" style="display:block; color: var(--col-sheen); font-size:0.875rem; margin-bottom:0.5rem; transition:color 0.15s;" onmouseover="this.style.color='var(--col-spark)'" onmouseout="this.style.color='var(--col-sheen)'">
+                  → Browse full product catalog
+                </a>
+                <a href="index.html" style="display:block; color: var(--col-sheen); font-size:0.875rem; transition:color 0.15s;" onmouseover="this.style.color='var(--col-spark)'" onmouseout="this.style.color='var(--col-sheen)'">
+                  → Back to homepage
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="brand">Alumi<span>Fab</span></div>
+          <p>Precision aluminum fabrication for windows, doors, railings, and building facades. Serving Lebanon and the wider Middle East since 2004.</p>
+        </div>
+        <div class="col-sm-6 col-lg-2 offset-lg-2">
+          <div class="footer-heading">Products</div>
+          <ul class="footer-links">
+            <li><a href="products.html?category=windows">Windows</a></li>
+            <li><a href="products.html?category=doors">Doors</a></li>
+            <li><a href="products.html?category=railings">Railings</a></li>
+            <li><a href="products.html?category=facades">Facades</a></li>
+            <li><a href="products.html?category=louvers">Louvres</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="contact.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <div class="footer-heading">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+9611234567">+961 1 234 567</a></li>
+            <li><a href="mailto:info@alumifab.lb">info@alumifab.lb</a></li>
+            <li style="color:var(--col-muted); font-size:0.85rem;">Beirut, Lebanon</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 AlumiFab. All rights reserved.</span>
+        <span class="mono" style="font-size:0.75rem; color: var(--col-spark);">Built with precision.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
