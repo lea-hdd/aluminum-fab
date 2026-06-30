@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Browse AlumiFab's full catalog of aluminum windows, doors, railings, facades, and louvre systems." />
+  <title>Products — AlumiFab</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Custom styles -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <script>window.APININJA_KEY = 'm97LbnFuSlxVGVZK5X6vLHvsb64s4Cg65OkSD3vW';</script>
+</head>
+<body data-page="catalog">
+
+  <!-- ======================================================
+       NAVIGATION
+  ====================================================== -->
+  <nav class="navbar navbar-expand-lg site-nav sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Alumi<span>Fab</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="mainNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="products.html">Products</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Get a Quote</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ======================================================
+         PAGE HEADER
+    ====================================================== -->
+    <section style="background: var(--col-steel); padding: 3rem 0 2.5rem; border-bottom: 3px solid var(--col-spark);">
+      <div class="container">
+        <span class="section-label">Full range</span>
+        <h1 class="section-title" style="color: var(--col-white); margin-bottom:0.5rem;">Product Catalog</h1>
+        <p style="color: var(--col-sheen); font-size: 0.95rem; max-width:55ch;">
+          18 standard systems across windows, doors, railings, facades, and louvres. All products are available in custom sizes and finishes.
+        </p>
+      </div>
+    </section>
+
+    <!-- ======================================================
+         CATALOG
+    ====================================================== -->
+    <section class="catalog-section">
+      <div class="container">
+        <div class="row g-4">
+
+          <!-- Main catalog column -->
+          <div class="col-lg-9">
+
+            <!-- Controls -->
+            <div class="catalog-controls">
+              <div class="row align-items-center g-3">
+                <div class="col-md-5">
+                  <input
+                    type="search"
+                    class="form-control"
+                    id="search-input"
+                    placeholder="Search products…"
+                    aria-label="Search products"
+                  />
+                </div>
+                <div class="col-md-7">
+                  <div class="d-flex flex-wrap gap-2">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="windows">Windows</button>
+                    <button class="filter-btn" data-category="doors">Doors</button>
+                    <button class="filter-btn" data-category="railings">Railings</button>
+                    <button class="filter-btn" data-category="facades">Facades</button>
+                    <button class="filter-btn" data-category="louvers">Louvres</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-2">
+                <small class="mono text-alloy">
+                  Showing <span id="product-count">18 products</span>
+                </small>
+              </div>
+            </div>
+
+            <!-- Product grid -->
+            <div class="row" id="product-grid">
+              <!-- Populated by Catalog class -->
+            </div>
+
+            <!-- Pagination -->
+            <nav aria-label="Product pagination" class="mt-4">
+              <ul class="pagination justify-content-center" id="pagination">
+                <!-- Populated by Catalog class -->
+              </ul>
+            </nav>
+
+          </div>
+
+          <!-- Sidebar -->
+          <div class="col-lg-3">
+
+            <!-- Live price widget -->
+            <div class="price-widget" id="price-widget" style="background: var(--col-surface); border-color: var(--col-border); border-left-color: var(--col-spark);">
+              <div class="price-widget__label" style="color: var(--col-muted);">Aluminum Spot Price</div>
+              <div>
+                <span class="price-widget__value" style="color: var(--col-steel);">—</span>
+                <span class="price-widget__unit">USD/t</span>
+              </div>
+              <div class="price-widget__status loading">Fetching…</div>
+            </div>
+
+            <!-- Category guide -->
+            <div style="background: var(--col-surface); border: 1px solid var(--col-border); border-radius: var(--radius-md); padding: var(--sp-lg); margin-top: var(--sp-lg);">
+              <div class="footer-heading" style="color: var(--col-steel); margin-bottom: var(--sp-md);">Browse by type</div>
+              <ul class="footer-links">
+                <li><a href="#" class="filter-btn-link" data-category="windows" style="color: var(--col-alloy);">🪟 Windows (5)</a></li>
+                <li class="mt-2"><a href="#" class="filter-btn-link" data-category="doors" style="color: var(--col-alloy);">🚪 Doors (4)</a></li>
+                <li class="mt-2"><a href="#" class="filter-btn-link" data-category="railings" style="color: var(--col-alloy);">🏗️ Railings (4)</a></li>
+                <li class="mt-2"><a href="#" class="filter-btn-link" data-category="facades" style="color: var(--col-alloy);">🏢 Facades (2)</a></li>
+                <li class="mt-2"><a href="#" class="filter-btn-link" data-category="louvers" style="color: var(--col-alloy);">🌤️ Louvres (2)</a></li>
+              </ul>
+            </div>
+
+            <!-- CTA -->
+            <div style="background: var(--col-steel); border-radius: var(--radius-md); padding: var(--sp-lg); margin-top: var(--sp-lg); text-align:center;">
+              <div style="font-family: var(--font-display); font-size:1.1rem; color:var(--col-white); text-transform:uppercase; margin-bottom:var(--sp-sm);">Need a custom size?</div>
+              <p style="color: var(--col-sheen); font-size:0.85rem; margin-bottom:var(--sp-md);">All products are available in non-standard dimensions and finishes.</p>
+              <a href="contact.html" class="btn-primary-custom" style="font-size:0.85rem; padding: 0.6rem 1.25rem;">Contact us</a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="brand">Alumi<span>Fab</span></div>
+          <p>Precision aluminum fabrication for windows, doors, railings, and building facades. Serving Lebanon and the wider Middle East since 2004.</p>
+        </div>
+        <div class="col-sm-6 col-lg-2 offset-lg-2">
+          <div class="footer-heading">Products</div>
+          <ul class="footer-links">
+            <li><a href="products.html?category=windows">Windows</a></li>
+            <li><a href="products.html?category=doors">Doors</a></li>
+            <li><a href="products.html?category=railings">Railings</a></li>
+            <li><a href="products.html?category=facades">Facades</a></li>
+            <li><a href="products.html?category=louvers">Louvres</a></li>
+          </ul>
+        </div>
+        <div class="col-sm-6 col-lg-2">
+          <div class="footer-heading">Company</div>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="contact.html">Get a Quote</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2">
+          <div class="footer-heading">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+9611234567">+961 1 234 567</a></li>
+            <li><a href="mailto:info@alumifab.lb">info@alumifab.lb</a></li>
+            <li style="color:var(--col-muted); font-size:0.85rem;">Beirut, Lebanon</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2024 AlumiFab. All rights reserved.</span>
+        <span class="mono" style="font-size:0.75rem; color: var(--col-spark);">Built with precision.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- Handle URL query param for category filtering -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const params = new URLSearchParams(window.location.search);
+      const cat    = params.get('category');
+      if (cat && catalog) {
+        const btn = document.querySelector(`.filter-btn[data-category="${cat}"]`);
+        if (btn) {
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          catalog.filterByCategory(cat);
+        }
+      }
+
+      // Sidebar category links
+      document.querySelectorAll('.filter-btn-link').forEach(link => {
+        link.addEventListener('click', e => {
+          e.preventDefault();
+          const cat = link.dataset.category;
+          document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          const mainBtn = document.querySelector(`.filter-btn[data-category="${cat}"]`);
+          if (mainBtn) mainBtn.classList.add('active');
+          catalog.filterByCategory(cat);
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      });
+    });
+  </script>
+</body>
+</html>
