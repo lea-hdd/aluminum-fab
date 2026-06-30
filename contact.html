@@ -274,8 +274,53 @@
                 <span class="alert-custom__icon">ℹ</span>
                 <div>
                   <div class="alert-custom__title" style="color:var(--col-white);">Site visits available</div>
-                  <div class="alert-custom__body">We can arrange a free on-site measurement for projects in Greater Beirut.</div>
+                  <div class="alert-custom__body">We can arrange a free on-site measurement for projects in all Keserwan and Beirut.</div>
                 </div>
+              </div>
+
+              <div class="delivery-planner" id="delivery-planner">
+              <h3>Delivery Goal Planner</h3>
+
+              <div class="form-group-custom">
+                <label class="form-label-custom" for="delivery-address">Project Delivery Address</label>
+                <input
+                  id="delivery-address"
+                  class="form-control-custom"
+                  type="text"
+                  placeholder="e.g. Mar Mikhael, Beirut"
+                />
+              </div>
+
+              <div class="form-group-custom">
+                <label class="form-label-custom" for="delivery-mode">Delivery Vehicle</label>
+                <select id="delivery-mode" class="form-control-custom">
+                  <option value="drive">Service car</option>
+                  <option value="light_truck" selected>Light truck</option>
+                  <option value="truck">Truck</option>
+                </select>
+              </div>
+
+              <button type="button" id="delivery-check-btn" class="btn-primary-custom w-100">
+                Check Delivery Goal
+              </button>
+
+              <div id="delivery-status" class="delivery-state empty">
+                Enter a delivery address to calculate distance and travel time.
+              </div>
+
+              <div id="delivery-summary"></div>
+
+              <div class="form-group-custom" id="delivery-search-wrap" hidden>
+                <label class="form-label-custom" for="delivery-step-search">Search Route Steps</label>
+                <input
+                  id="delivery-step-search"
+                  class="form-control-custom"
+                  type="search"
+                  placeholder="Search route instructions..."
+                />
+              </div>
+
+              <div id="delivery-steps"></div>
               </div>
 
               <div style="border-top: 1px solid rgba(255,255,255,0.1); padding-top: var(--sp-lg); margin-top: var(--sp-lg);">

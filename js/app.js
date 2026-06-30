@@ -282,6 +282,177 @@ class CurrencyConverter {
 }
 
 // ============================================================
+// CLASS: DeliveryGoalPlanner
+// Uses Geoapify Geocoding + Routing APIs to calculate delivery goals
+// ============================================================
+class DeliveryGoalPlanner {
+  constructor() {
+    this.apiKey = '963f011eb9de49ceaa5fde7e3c1347f4';
+    this.workshop = {
+      lat: 33.9806,
+      lon: 35.6178,
+      label: 'SAM S.A.R.L. Workshop, Sarba, Jounieh'
+    };
+
+    this.addressEl = document.getElementById('delivery-address');
+    this.modeEl = document.getElementById('delivery-mode');
+    this.buttonEl = document.getElementById('delivery-check-btn');
+    this.statusEl = document.getElementById('delivery-status');
+    this.summaryEl = document.getElementById('delivery-summary');
+    this.searchWrapEl = document.getElementById('delivery-search-wrap');
+    this.searchEl = document.getElementById('delivery-step-search');
+    this.stepsEl = document.getElementById('delivery-steps');
+    this.steps = [];
+  }
+
+  init() {
+    if (!this.addressEl || !this.buttonEl) return;
+
+    this.buttonEl.addEventListener('click', () => this.checkDeliveryGoal());
+
+    if (this.searchEl) {
+      this.searchEl.addEventListener('input', e => this.filterSteps(e.target.value));
+    }
+  }
+
+  async checkDeliveryGoal() {
+    const address = this.addressEl.value.trim();
+    const mode = this.modeEl.value;
+
+    if (!address) {
+      this.setState('empty', 'Please enter a delivery address first.');
+      return;
+    }
+
+    this.setState('loading', 'Finding address and calculating delivery route...');
+    this.summaryEl.innerHTML = '';
+    this.stepsEl.innerHTML = '';
+    this.searchWrapEl.hidden = true;
+
+    try {
+      const destination = await this.geocodeAddress(address);
+      const route = await this.fetchRoute(destination, mode);
+
+      this.renderSummary(route, destination);
+      this.steps = this.extractSteps(route);
+      this.renderSteps(this.steps);
+
+      this.searchWrapEl.hidden = this.steps.length === 0;
+      this.setState('', 'Delivery route loaded from Geoapify.');
+    } catch (err) {
+      console.warn('DeliveryGoalPlanner:', err.message);
+      this.setState('error', err.message || 'Delivery route unavailable.');
+    }
+  }
+
+  async geocodeAddress(address) {
+    const url =
+      `https://api.geoapify.com/v1/geocode/search?text=${encodeURIComponent(address)}` +
+      `&format=json&limit=1&filter=countrycode:lb&apiKey=${this.apiKey}`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Geocoding failed with status ${res.status}`);
+
+    const data = await res.json();
+
+    if (!data.results || data.results.length === 0) {
+      throw new Error('No matching address found. Try a more specific location.');
+    }
+
+    return data.results[0];
+  }
+
+  async fetchRoute(destination, mode) {
+    const waypoints = `${this.workshop.lat},${this.workshop.lon}|${destination.lat},${destination.lon}`;
+
+    const url =
+      `https://api.geoapify.com/v1/routing?waypoints=${waypoints}` +
+      `&mode=${mode}&format=json&apiKey=${this.apiKey}`;
+
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`Routing failed with status ${res.status}`);
+
+    const data = await res.json();
+
+    if (!data.results || data.results.length === 0) {
+      throw new Error('No delivery route found for this address.');
+    }
+
+    return data.results[0];
+  }
+
+  renderSummary(route, destination) {
+    const distanceKm = (route.distance / 1000).toFixed(1);
+    const timeMin = Math.round(route.time / 60);
+    const goal = timeMin <= 60 ? 'Within standard delivery range' : 'Extended delivery planning needed';
+
+    this.summaryEl.innerHTML = `
+      <div class="delivery-summary-grid">
+        <div class="delivery-metric">
+          <span>Distance</span>
+          <strong>${distanceKm} km</strong>
+        </div>
+        <div class="delivery-metric">
+          <span>ETA</span>
+          <strong>${timeMin} min</strong>
+        </div>
+        <div class="delivery-metric">
+          <span>Goal</span>
+          <strong>${goal}</strong>
+        </div>
+      </div>
+      <p class="delivery-found-address">Matched address: ${destination.formatted}</p>
+    `;
+  }
+
+  extractSteps(route) {
+    if (!route.legs) return [];
+
+    return route.legs.flatMap(leg => leg.steps || []);
+  }
+
+  renderSteps(steps) {
+    if (!steps.length) {
+      this.stepsEl.innerHTML = '<div class="delivery-state empty">No route steps match your search.</div>';
+      return;
+    }
+
+    this.stepsEl.innerHTML = steps.map((step, index) => {
+      const text = step.instruction?.text || 'Continue on route';
+      const distance = step.distance ? `${Math.round(step.distance)} m` : '';
+
+      return `
+        <div class="delivery-step">
+          <strong>${index + 1}.</strong>
+          <span>${text}</span>
+          <small>${distance}</small>
+        </div>
+      `;
+    }).join('');
+  }
+
+  filterSteps(query) {
+    const q = query.toLowerCase().trim();
+
+    if (!q) {
+      this.renderSteps(this.steps);
+      return;
+    }
+
+    const filtered = this.steps.filter(step =>
+      (step.instruction?.text || '').toLowerCase().includes(q)
+    );
+
+    this.renderSteps(filtered);
+  }
+
+  setState(type, message) {
+    this.statusEl.textContent = message;
+    this.statusEl.className = `delivery-state ${type}`;
+  }
+}
+
+// ============================================================
 // PRODUCT DATA — 18 original items across 5 categories
 // ============================================================
 const PRODUCTS = [
@@ -449,6 +620,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
       form.addEventListener('submit', handleQuoteSubmit);
     }
+    const deliveryPlanner = new DeliveryGoalPlanner();
+    deliveryPlanner.init();
   }
 });
 

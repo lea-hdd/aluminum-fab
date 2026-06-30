@@ -659,6 +659,92 @@ img { max-width: 100%; height: auto; display: block; }
   font-size: 0.9rem;
 }
 
+.delivery-planner {
+  margin-top: var(--sp-lg);
+  padding: var(--sp-lg);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-left: 3px solid var(--col-spark);
+  border-radius: var(--radius-md);
+  background: rgba(255,255,255,0.04);
+}
+
+.delivery-planner h3 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  color: var(--col-white);
+  text-transform: uppercase;
+  margin-bottom: var(--sp-md);
+}
+
+.delivery-state {
+  margin-top: var(--sp-md);
+  font-size: 0.85rem;
+  color: var(--col-sheen);
+}
+
+.delivery-state.loading {
+  color: var(--col-spark);
+}
+
+.delivery-state.error {
+  color: #ffb4a8;
+}
+
+.delivery-state.empty {
+  color: var(--col-muted);
+}
+
+.delivery-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-sm);
+  margin-top: var(--sp-md);
+}
+
+.delivery-metric {
+  padding: var(--sp-sm);
+  background: rgba(255,255,255,0.07);
+  border-radius: var(--radius-sm);
+}
+
+.delivery-metric span {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--col-muted);
+  text-transform: uppercase;
+}
+
+.delivery-metric strong {
+  display: block;
+  margin-top: 0.2rem;
+  color: var(--col-white);
+  font-size: 0.95rem;
+}
+
+.delivery-found-address {
+  margin-top: var(--sp-sm);
+  font-size: 0.8rem;
+  color: var(--col-sheen);
+}
+
+.delivery-step {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 0.5rem;
+  padding: 0.65rem 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  color: var(--col-sheen);
+  font-size: 0.85rem;
+}
+
+.delivery-step strong {
+  color: var(--col-spark);
+}
+
+.delivery-step small {
+  color: var(--col-muted);
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */
