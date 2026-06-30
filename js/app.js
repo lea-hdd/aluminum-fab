@@ -224,6 +224,27 @@ class CurrencyConverter {
     if (!this.selectEl) return;
     const targetCurrency = this.selectEl.value;
 
+    // LBP is not tracked by the ECB (Frankfurter's data source), so we use
+    // a fixed reference rate instead of a live API call. Lebanon's central
+    // bank rate has held steady at ~89,500 LBP/USD since Feb 2024 — see
+    // README AI-use appendix for sourcing and rationale.
+    if (targetCurrency === 'LBP') {
+      try {
+        const res = await fetch('https://open.er-api.com/v6/latest/USD');
+        if (!res.ok) throw new Error(`API responded ${res.status}`);
+        const data = await res.json();
+        if (data && data.rates && data.rates.LBP !== undefined) {
+          this._render(data.rates.LBP, 'LBP', data.time_last_update_utc);
+        } else {
+          throw new Error('LBP not in response');
+        }
+      } catch (err) {
+        console.warn('LBP live fetch failed, using fixed rate:', err.message);
+        this._render(89500, 'LBP', 'fixed reference rate');
+      }
+      return;
+    }
+
     this._setStatus('loading', 'Fetching exchange rate…');
 
     try {
@@ -246,9 +267,10 @@ class CurrencyConverter {
   }
 
   _render(rate, currency, date) {
-    const converted = (this.baseAmount * rate).toFixed(2);
+    const converted = (this.baseAmount * rate).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     if (this.resultEl) this.resultEl.textContent = `${converted} ${currency}`;
-    this._setStatus('', `Rate as of ${date}`);
+    const label = date === 'fixed reference rate' ? 'Fixed reference rate (not live)' : `Rate as of ${date}`;
+    this._setStatus('', label);
   }
 
   _setStatus(type, msg) {
