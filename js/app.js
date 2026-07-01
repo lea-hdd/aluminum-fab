@@ -446,7 +446,7 @@ class DeliveryGoalPlanner {
     }).join('');
   }
 
-  filterSteps(query) {
+/*  filterSteps(query) {
     const q = query.toLowerCase().trim();
 
     if (!q) {
@@ -459,7 +459,7 @@ class DeliveryGoalPlanner {
     );
 
     this.renderSteps(filtered);
-  }
+  }*/
 
   setState(type, message) {
     this.statusEl.textContent = message;
