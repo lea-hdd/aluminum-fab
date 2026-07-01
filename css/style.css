@@ -745,6 +745,29 @@ img { max-width: 100%; height: auto; display: block; }
   color: var(--col-muted);
 }
 
+.delivery-filter {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: var(--sp-md);
+}
+
+.delivery-filter-btn {
+  flex: 1;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: var(--col-sheen);
+  border-radius: var(--radius-sm);
+  padding: 0.55rem 0.75rem;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.delivery-filter-btn.active {
+  background: var(--col-spark);
+  color: var(--col-ink);
+  border-color: var(--col-spark);
+}
+
 /* ============================================================
    FOOTER
    ============================================================ */

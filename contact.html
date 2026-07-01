@@ -310,14 +310,13 @@
 
               <div id="delivery-summary"></div>
 
-              <div class="form-group-custom" id="delivery-search-wrap" hidden>
-                <label class="form-label-custom" for="delivery-step-search">Search Route Steps</label>
-                <input
-                  id="delivery-step-search"
-                  class="form-control-custom"
-                  type="search"
-                  placeholder="Search route instructions..."
-                />
+              <div class="delivery-filter" id="delivery-filter" hidden>
+              <button type="button" class="delivery-filter-btn active" data-view="summary">
+                Summary Only
+              </button>
+              <button type="button" class="delivery-filter-btn" data-view="details">
+                Full Route Details
+              </button>
               </div>
 
               <div id="delivery-steps"></div>

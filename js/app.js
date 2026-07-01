@@ -299,8 +299,8 @@ class DeliveryGoalPlanner {
     this.buttonEl = document.getElementById('delivery-check-btn');
     this.statusEl = document.getElementById('delivery-status');
     this.summaryEl = document.getElementById('delivery-summary');
-    this.searchWrapEl = document.getElementById('delivery-search-wrap');
-    this.searchEl = document.getElementById('delivery-step-search');
+    this.filterEl = document.getElementById('delivery-filter');
+    this.currentView = 'summary';
     this.stepsEl = document.getElementById('delivery-steps');
     this.steps = [];
   }
@@ -309,10 +309,16 @@ class DeliveryGoalPlanner {
     if (!this.addressEl || !this.buttonEl) return;
 
     this.buttonEl.addEventListener('click', () => this.checkDeliveryGoal());
+//here new
+    document.querySelectorAll('.delivery-filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.delivery-filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    if (this.searchEl) {
-      this.searchEl.addEventListener('input', e => this.filterSteps(e.target.value));
-    }
+      this.currentView = btn.dataset.view;
+      this.renderSteps(this.steps);
+      });
+    });
   }
 
   async checkDeliveryGoal() {
@@ -327,7 +333,7 @@ class DeliveryGoalPlanner {
     this.setState('loading', 'Finding address and calculating delivery route...');
     this.summaryEl.innerHTML = '';
     this.stepsEl.innerHTML = '';
-    this.searchWrapEl.hidden = true;
+    this.filterEl.hidden = true;
 
     try {
       const destination = await this.geocodeAddress(address);
@@ -337,7 +343,7 @@ class DeliveryGoalPlanner {
       this.steps = this.extractSteps(route);
       this.renderSteps(this.steps);
 
-      this.searchWrapEl.hidden = this.steps.length === 0;
+      this.filterEl.hidden = this.steps.length === 0;
       this.setState('', 'Delivery route loaded from Geoapify.');
     } catch (err) {
       console.warn('DeliveryGoalPlanner:', err.message);
@@ -411,13 +417,22 @@ class DeliveryGoalPlanner {
     return route.legs.flatMap(leg => leg.steps || []);
   }
 
-  renderSteps(steps) {
-    if (!steps.length) {
-      this.stepsEl.innerHTML = '<div class="delivery-state empty">No route steps match your search.</div>';
+  renderSteps(steps = []) {
+    if (!this.stepsEl) return;
+
+    const safeSteps = Array.isArray(steps) ? steps : [];
+
+    if (this.currentView === 'summary') {
+      this.stepsEl.innerHTML = '';
       return;
     }
 
-    this.stepsEl.innerHTML = steps.map((step, index) => {
+    if (safeSteps.length === 0) {
+      this.stepsEl.innerHTML = '<div class="delivery-state empty">No route details available.</div>';
+      return;
+    }
+
+    this.stepsEl.innerHTML = safeSteps.map((step, index) => {
       const text = step.instruction?.text || 'Continue on route';
       const distance = step.distance ? `${Math.round(step.distance)} m` : '';
 
